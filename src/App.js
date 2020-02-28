@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import ReactDOM from "react-dom";
+import ThemeContext from './ThemeContext'
+import MainWithClass from './MainWithClass'
+import MainWithClassConsumer from './MainWithClassConsumer'
+import Header from './Header'
+import MainWithFunction from './MainWithFunction'
 
 function App() {
+  
+  const themeHook = useState("light");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <ThemeContext.Provider value = {themeHook}>
+      <div>
+        <Header />
+        <MainWithFunction />
+      </div>
+    </ThemeContext.Provider>
   );
 }
+
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
 
 export default App;
